@@ -15,11 +15,11 @@ export const authSlice = createSlice({
     name: AUTH,
     initialState: authInitialState,
     reducers: {
-        registerUserAction: (state: AuthStateType, { payload: formData }: PayloadAction<AuthFormType>) => {
+        registerUserAction: (state: AuthStateType, {}: PayloadAction<AuthFormType>) => {
             state.isLoading = true;
             state.error = null;
         },
-        loginUserAction: (state: AuthStateType, { payload: formData }: PayloadAction<AuthFormType>) => {
+        loginUserAction: (state: AuthStateType, {}: PayloadAction<AuthFormType>) => {
             state.isLoading = true;
             state.error = null;
         },

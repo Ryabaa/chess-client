@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { AuthWrapper, Tab, Tabs } from "./styles";
 
-const Auth: React.FC = () => {
+const Auth: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const isCurrentTabLogin: boolean = location.pathname.includes("login") ? true : false;

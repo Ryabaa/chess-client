@@ -3,16 +3,16 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 import { store } from "./store";
 
-import "react-toastify/dist/ReactToastify.css";
-import GlobalStyles from "../styles/globalStyles";
-import { darkTheme } from "../styles/themes";
+import GlobalStyles from "@styles/globalStyles";
+import { darkTheme } from "@styles/themes";
 
-import Auth from "../features/auth/Auth";
-import Login from "../features/auth/Login";
-import Register from "../features/auth/Register";
+import Auth from "@features/auth/Auth";
+import Login from "@features/auth/Login";
+import Register from "@features/auth/Register";
 
 const App: FC = () => {
     return (

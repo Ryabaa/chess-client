@@ -1,5 +1,6 @@
 import { all, fork } from "redux-saga/effects";
-import { watchAuthUser } from "../features/auth/sagas";
+
+import { watchAuthUser } from "@features/auth/sagas";
 
 const rootSaga = function* () {
     yield all([fork(watchAuthUser)]);

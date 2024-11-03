@@ -1,4 +1,4 @@
-import { AuthStateType } from "../features/auth/types";
+import { AuthStateType } from "@features/auth/types";
 
 export type StateType = {
     auth: AuthStateType;

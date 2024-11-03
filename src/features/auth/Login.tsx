@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+import { ChangeEvent, FC, FormEvent, useRef } from "react";
 
-import { RootState } from "../../app/store";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { RootState } from "@app/store";
+import { useAppDispatch, useAppSelector } from "@hooks/reduxHooks";
 
 import { loginUserAction } from "./slice";
 
 import { Button, Container, Form, Input, Text, Title } from "./styles";
 
-import { Loader } from "../loader/Loader";
+import { Loader } from "@features/loader/Loader";
 
-const Login: React.FC = () => {
+const Login: FC = () => {
     const dispatch = useAppDispatch();
     const { isLoading } = useAppSelector((state: RootState) => state.auth);
-    const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const usernameRef = useRef<string>("");
+    const passwordRef = useRef<string>("");
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        dispatch(loginUserAction({ username, password }));
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault();
+        dispatch(loginUserAction({ username: usernameRef.current, password: passwordRef.current }));
+    };
+
+    const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
+        usernameRef.current = event.target.value;
+    };
+
+    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+        passwordRef.current = event.target.value;
     };
 
     return (
         <Form onSubmit={handleSubmit}>
             <Title>Welcome back!</Title>
             <Text>Sign in to continue</Text>
-            <Input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+            <Input type="text" placeholder="Username" onChange={handleUsernameChange} />
+            <Input type="password" placeholder="Password" onChange={handlePasswordChange} />
             <Container>
                 <Button type="submit">Login</Button>
                 {isLoading && <Loader size={60} />}

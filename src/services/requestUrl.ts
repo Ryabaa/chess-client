@@ -1,4 +1,4 @@
-const api = "http://localhost:4000/api/";
+const api = "http://localhost:4000/";
 
 export const requestUrl = {
     login: `${api}auth/login/`,

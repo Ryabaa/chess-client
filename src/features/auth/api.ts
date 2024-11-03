@@ -1,5 +1,5 @@
 import axios from "axios";
-import { requestUrl } from "../../services/requestUrl";
+import { requestUrl } from "@services/requestUrl";
 import { AuthFormType } from "./types";
 
 export const registerUserApi = async (formData: AuthFormType) => {
