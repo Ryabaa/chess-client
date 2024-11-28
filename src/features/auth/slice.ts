@@ -1,41 +1,53 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthStateType, AUTH, AuthDataType, AuthFormType } from "./types";
+import { AuthStateType, AUTH, AuthFormType, AuthAccessTokenType, CheckAuthType } from "./types";
+import { setLocalStorage } from "@utils/localStorage";
 
 const authInitialState: AuthStateType = {
-    authData: {
-        id: null,
-        token: null,
-    },
-    error: null,
     isLoading: false,
-    isAuthenticated: false,
+    isAuthorized: false,
 };
 
 export const authSlice = createSlice({
     name: AUTH,
     initialState: authInitialState,
     reducers: {
+        checkAuthAction: (state: AuthStateType, {}: PayloadAction<AuthAccessTokenType>) => {
+            state.isLoading = true;
+        },
+        checkAuthSuccessAction: (state: AuthStateType, { payload }: PayloadAction<CheckAuthType>) => {
+            const { isAuthorized } = payload;
+            state.isAuthorized = isAuthorized;
+            state.isLoading = false;
+        },
+        setNotAuthAction: (state: AuthStateType) => {
+            state.isAuthorized = false;
+        },
         registerUserAction: (state: AuthStateType, {}: PayloadAction<AuthFormType>) => {
             state.isLoading = true;
-            state.error = null;
         },
         loginUserAction: (state: AuthStateType, {}: PayloadAction<AuthFormType>) => {
             state.isLoading = true;
-            state.error = null;
         },
-        authUserSuccessAction: (state: AuthStateType, { payload: authData }: PayloadAction<AuthDataType>) => {
+        authUserSuccessAction: (state: AuthStateType, { payload }: PayloadAction<AuthAccessTokenType>) => {
+            const { accessToken } = payload;
+            state.isAuthorized = true;
+            setLocalStorage("accessToken", accessToken);
             state.isLoading = false;
-            state.isAuthenticated = true;
-            state.authData = authData;
         },
-        authUserErrorAction: (state: AuthStateType, { payload: error }: PayloadAction<string>) => {
+        authErrorAction: (state: AuthStateType) => {
             state.isLoading = false;
-            state.error = error;
         },
     },
 });
 
-export const { registerUserAction, loginUserAction, authUserSuccessAction, authUserErrorAction } =
-    authSlice.actions;
+export const {
+    checkAuthAction,
+    checkAuthSuccessAction,
+    setNotAuthAction,
+    registerUserAction,
+    loginUserAction,
+    authUserSuccessAction,
+    authErrorAction,
+} = authSlice.actions;
 
 export default authSlice.reducer;

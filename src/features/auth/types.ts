@@ -1,18 +1,19 @@
 export type AuthFormType = {
-    username: string | null;
+    email: string | null;
     password: string | null;
 };
 
-export type AuthDataType = {
-    id: string | null;
-    token: string | null;
+export type AuthAccessTokenType = {
+    accessToken: string;
+};
+
+export type CheckAuthType = {
+    isAuthorized: boolean;
 };
 
 export type AuthStateType = {
-    authData: AuthDataType;
-    error: string | null;
     isLoading: boolean;
-    isAuthenticated: boolean;
+    isAuthorized: boolean;
 };
 
 export const AUTH = "auth";

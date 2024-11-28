@@ -17,7 +17,7 @@ const Login: FC = () => {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        dispatch(loginUserAction({ username: usernameRef.current, password: passwordRef.current }));
+        dispatch(loginUserAction({ email: usernameRef.current, password: passwordRef.current }));
     };
 
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ const Login: FC = () => {
         <Form onSubmit={handleSubmit}>
             <Title>Welcome back!</Title>
             <Text>Sign in to continue</Text>
-            <Input type="text" placeholder="Username" onChange={handleUsernameChange} />
+            <Input type="email" placeholder="Email" onChange={handleUsernameChange} />
             <Input type="password" placeholder="Password" onChange={handlePasswordChange} />
             <Container>
                 <Button type="submit">Login</Button>

@@ -17,7 +17,7 @@ const Register: FC = () => {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        dispatch(registerUserAction({ username: usernameRef.current, password: passwordRef.current }));
+        dispatch(registerUserAction({ email: usernameRef.current, password: passwordRef.current }));
     };
 
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ const Register: FC = () => {
         <Form onSubmit={handleSubmit}>
             <Title>Welcome!</Title>
             <Text>Register to continue</Text>
-            <Input type="text" placeholder="Username" onChange={handleUsernameChange} />
+            <Input type="email" placeholder="Email" onChange={handleUsernameChange} />
             <Input type="password" placeholder="Password" onChange={handlePasswordChange} />
             <Container>
                 <Button type="submit">Register</Button>

@@ -10,6 +10,7 @@ import { store } from "./store";
 import GlobalStyles from "@styles/globalStyles";
 import { darkTheme } from "@styles/themes";
 
+import AuthProvider from "./AuthProvider";
 import Auth from "@features/auth/Auth";
 import Login from "@features/auth/Login";
 import Register from "@features/auth/Register";
@@ -17,29 +18,32 @@ import Register from "@features/auth/Register";
 const App: FC = () => {
     return (
         <Provider store={store}>
-            <ThemeProvider theme={darkTheme}>
-                <GlobalStyles />
-                <ToastContainer
-                    position="top-right"
-                    autoClose={3000}
-                    hideProgressBar={true}
-                    newestOnTop={true}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss={false}
-                    draggable
-                    pauseOnHover={false}
-                    theme="dark"
-                />
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/auth/*" element={<Auth />}>
-                            <Route path="login" element={<Login />} />
-                            <Route path="register" element={<Register />} />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-            </ThemeProvider>
+            <AuthProvider>
+                <ThemeProvider theme={darkTheme}>
+                    <GlobalStyles />
+                    <ToastContainer
+                        style={{ lineHeight: "1.5" }}
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar={true}
+                        newestOnTop={true}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss={false}
+                        draggable
+                        pauseOnHover={false}
+                        theme="dark"
+                    />
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/auth/*" element={<Auth />}>
+                                <Route path="login" element={<Login />} />
+                                <Route path="register" element={<Register />} />
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
+                </ThemeProvider>
+            </AuthProvider>
         </Provider>
     );
 };
